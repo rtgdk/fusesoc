@@ -167,7 +167,7 @@ class Section(object):
 class ScriptsSection(Section):
     TAG = 'scripts'
     def __init__(self, items=None):
-        super(ScriptsSection, self).__init__()
+        super().__init__()
         self._add_member('pre_synth_scripts', StringList, 'Scripts to run before backend synthesis')
         self._add_member('post_impl_scripts', StringList, 'Scripts to run after backend implementation')
         self._add_member('pre_run_scripts'  , StringList, 'Scripts to run before running simulations')
@@ -180,7 +180,7 @@ class ScriptsSection(Section):
 
 class ToolSection(Section):
     def __init__(self):
-        super(ToolSection, self).__init__()
+        super().__init__()
         self._add_member('depend', VlnvList, "Tool-specific Dependencies")
     def __str__(self):
         s = ""
@@ -194,7 +194,7 @@ class MainSection(Section):
     TAG = 'main'
 
     def __init__(self, items=None):
-        super(MainSection, self).__init__()
+        super().__init__()
 
         self._add_member('name'       , str     , "Component name")
         self._add_member('backend'    , str     , "Backend for FPGA implementation")
@@ -212,7 +212,7 @@ class VhdlSection(Section):
     TAG = 'vhdl'
 
     def __init__(self, items=None):
-        super(VhdlSection, self).__init__()
+        super().__init__()
 
         self._add_member('src_files', PathList, "VHDL source files for simulation and synthesis")
 
@@ -225,7 +225,7 @@ class VerilogSection(Section):
     TAG = 'verilog'
 
     def __init__(self, items=None):
-        super(VerilogSection, self).__init__()
+        super().__init__()
 
         self.include_dirs = []
         self.tb_include_dirs = []
@@ -252,7 +252,7 @@ class FileSetSection(Section):
     TAG = 'fileset'
     named = True
     def __init__(self, items=None):
-        super(FileSetSection, self).__init__()
+        super().__init__()
 
         self._add_member('files'          , FileList, "List of files in fileset")
         self._add_member('file_type'      , str     , "Default file type of the files in fileset")
@@ -281,7 +281,7 @@ class VpiSection(Section):
     TAG = 'vpi'
 
     def __init__(self, items=None):
-        super(VpiSection, self).__init__()
+        super().__init__()
 
         self.include_dirs = []
 
@@ -302,7 +302,7 @@ class ModelsimSection(ToolSection):
     TAG = 'modelsim'
 
     def __init__(self, items=None):
-        super(ModelsimSection, self).__init__()
+        super().__init__()
 
         self._add_member('vlog_options', StringList, "Additional arguments for vlog")
         self._add_member('vsim_options', StringList, "Additional arguments for vsim")
@@ -315,7 +315,7 @@ class GhdlSection(ToolSection):
     TAG = 'ghdl'
 
     def __init__(self, items=None):
-        super(GhdlSection, self).__init__()
+        super().__init__()
 
         self._add_member('analyze_options', StringList, "Extra GHDL analyzer options")
         self._add_member('run_options', StringList, "Extra GHDL run options")
@@ -324,7 +324,7 @@ class GhdlSection(ToolSection):
             self.load_dict(items)
 
     def __str__(self):
-        s = super(GhdlSection, self).__str__()
+        s = super().__str__()
         if self.analyze_options: s += "Extra GHDL analyzer options : {}\n".format(' '.join(self.analyze_options))
         if self.run_options: s += "Extra GHDL run options : {}\n".format(' '.join(self.run_options))
         return s
@@ -334,7 +334,7 @@ class IcarusSection(ToolSection):
     TAG = 'icarus'
 
     def __init__(self, items=None):
-        super(IcarusSection, self).__init__()
+        super().__init__()
 
         self._add_member('iverilog_options', StringList, "Extra Icarus verilog compile options")
 
@@ -342,7 +342,7 @@ class IcarusSection(ToolSection):
             self.load_dict(items)
 
     def __str__(self):
-        s = super(IcarusSection, self).__str__()
+        s = super().__str__()
         if self.iverilog_options: s += "Icarus compile options : {}\n".format(' '.join(self.iverilog_options))
         return s
 
@@ -352,7 +352,7 @@ class IsimSection(ToolSection):
     TAG = 'isim'
 
     def __init__(self, items=None):
-        super(IsimSection, self).__init__()
+        super().__init__()
 
         self._add_member('isim_options', StringList, "Extra Isim compile options")
 
@@ -360,7 +360,7 @@ class IsimSection(ToolSection):
             self.load_dict(items)
 
     def __str__(self):
-        s = super(IsimSection, self).__str__()
+        s = super().__str__()
         if self.isim_options: s += "Isim compile options : {}\n".format(' '.join(self.isim_options))
         return s
 
@@ -370,7 +370,7 @@ class XsimSection(ToolSection):
     TAG = 'xsim'
 
     def __init__(self, items=None):
-        super(XsimSection, self).__init__()
+        super().__init__()
 
         self._add_member('xsim_options', StringList, "Extra Xsim compile options")
 
@@ -378,7 +378,7 @@ class XsimSection(ToolSection):
             self.load_dict(items)
 
     def __str__(self):
-        s = super(XsimSection, self).__str__()
+        s = super().__str__()
         if self.xsim_options: s += "Xsim compile options : {}\n".format(' '.join(self.xsim_options))
         return s
 
@@ -387,7 +387,7 @@ class VerilatorSection(ToolSection):
     TAG = 'verilator'
 
     def __init__(self, items=None):
-        super(VerilatorSection, self).__init__()
+        super().__init__()
 
         self.include_dirs = []
         self.archive = False
@@ -414,7 +414,7 @@ class VerilatorSection(ToolSection):
 
 
     def __str__(self):
-        s = super(VerilatorSection, self).__str__()
+        s = super().__str__()
         s += """Verilator options       : {verilator_options}
 Testbench source files  : {src_files}
 Testbench include files : {include_files}
@@ -438,7 +438,7 @@ class IcestormSection(ToolSection):
     TAG = 'icestorm'
 
     def __init__(self, items=None):
-        super(IcestormSection, self).__init__()
+        super().__init__()
 
         self._add_member('arachne_pnr_options', StringList, "arachne-pnr options")
         self._add_member('pcf_file' , FileList, "Physical constraint file")
@@ -453,7 +453,7 @@ class VivadoSection(ToolSection):
     TAG = 'vivado'
 
     def __init__(self, items=None):
-        super(VivadoSection, self).__init__()
+        super().__init__()
 
         self._add_member('part'       , str, 'FPGA device part')
         self._add_member('hw_device'  , str, 'FPGA device identifier')
@@ -467,7 +467,7 @@ class IseSection(ToolSection):
     TAG = 'ise'
 
     def __init__(self, items=None):
-        super(IseSection, self).__init__()
+        super().__init__()
 
         self._add_member('ucf_files' , FileList, "UCF constraint files")
         self._add_member('tcl_files' , FileList, "Extra TCL scripts")
@@ -486,7 +486,7 @@ class QuartusSection(ToolSection):
     TAG = 'quartus'
 
     def __init__(self, items=None):
-        super(QuartusSection, self).__init__()
+        super().__init__()
 
         self._add_member('qsys_files', FileList, "Qsys IP description files")
         self._add_member('sdc_files' , FileList, "SDC constraint files")
@@ -505,7 +505,7 @@ class ParameterSection(Section):
     TAG = 'parameter'
     named = True
     def __init__(self, items=None):
-        super(ParameterSection, self).__init__()
+        super().__init__()
 
         self._add_member('datatype'   , str, 'Data type of argument (int, str, bool, file')
         self._add_member('default'    , str, 'Default value of argument')

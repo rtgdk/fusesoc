@@ -15,13 +15,13 @@ class Isim(Simulator):
 
         if system.isim is not None:
             self.isim_options = system.isim.isim_options
-        super(Isim, self).__init__(system)
+        super().__init__(system)
 
 
 
 
     def configure(self, args):
-        super(Isim, self).configure(args)
+        super().configure(args)
         self._write_config_files()
 
     def _write_config_files(self):
@@ -61,7 +61,7 @@ class Isim(Simulator):
         f2.close()
 
     def build(self):
-        super(Isim, self).build()
+        super().build()
 
         #Check if any VPI modules are present and display warning
         if len(self.vpi_modules) > 0:
@@ -86,7 +86,7 @@ class Isim(Simulator):
                  errormsg = "Failed to compile Isim simulation model").run()
 
     def run(self, args):
-        super(Isim, self).run(args)
+        super().run(args)
 
         #FIXME: Handle failures. Save stdout/stderr.
         args = []
@@ -103,4 +103,4 @@ class Isim(Simulator):
                  cwd = self.work_root,
                  errormsg = "Failed to run Isim simulation").run()
 
-        super(Isim, self).done(args)
+        super().done(args)

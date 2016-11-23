@@ -13,7 +13,7 @@ class Backend(EdaTool):
     TOOL_TYPE = 'bld'
 
     def __init__(self, system):
-        super(Backend, self).__init__(system)
+        super().__init__(system)
 
         self.backend = self.system.backend
         self.env['SYSTEM_ROOT'] = os.path.abspath(self.system.files_root)
@@ -21,7 +21,7 @@ class Backend(EdaTool):
 
     def configure(self, args):
         self.parse_args(args, 'build', ['vlogparam', 'vlogdefine'])
-        super(Backend, self).configure(args)
+        super().configure(args)
         self._export_backend_files()
 
     def _export_backend_files(self):

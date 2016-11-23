@@ -15,13 +15,13 @@ class Xsim(Simulator):
 
         if system.xsim is not None:
             self.xsim_options = system.xsim.xsim_options
-        super(Xsim, self).__init__(system)
+        super().__init__(system)
 
 
 
 
     def configure(self, args):
-        super(Xsim, self).configure(args)
+        super().configure(args)
         self._write_config_files()
 
     def _write_config_files(self):
@@ -61,7 +61,7 @@ class Xsim(Simulator):
         f2.close()
 
     def build(self):
-        super(Xsim, self).build()
+        super().build()
 
         #Check if any VPI modules are present and display warning
         if len(self.vpi_modules) > 0:
@@ -88,7 +88,7 @@ class Xsim(Simulator):
                  errormsg = "Failed to compile Xsim simulation model").run()
 
     def run(self, args):
-        super(Xsim, self).run(args)
+        super().run(args)
 
         #FIXME: Handle failures. Save stdout/stderr.
         args = []
@@ -106,4 +106,4 @@ class Xsim(Simulator):
                  cwd = self.work_root,
                  errormsg = "Failed to run Xsim simulation").run()
 
-        super(Xsim, self).done(args)
+        super().done(args)

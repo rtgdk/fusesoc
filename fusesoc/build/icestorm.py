@@ -30,7 +30,7 @@ ARACHNE_PNR_OPTIONS := {arachne_pnr_options}
     TOOL_NAME = 'icestorm'
 
     def configure(self, args):
-        super(Icestorm, self).configure(args)
+        super().configure(args)
         self._write_config_files()
 
     def _write_config_files(self):
@@ -79,8 +79,8 @@ ARACHNE_PNR_OPTIONS := {arachne_pnr_options}
 
 
     def build(self, args):
-        super(Icestorm, self).build(args)
+        super().build(args)
 
         utils.Launcher('make', cwd = self.work_root).run()
 
-        super(Icestorm, self).done()
+        super().done()

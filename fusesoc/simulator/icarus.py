@@ -15,10 +15,10 @@ class Icarus(Simulator):
 
         if system.icarus is not None:
             self.iverilog_options = system.icarus.iverilog_options
-        super(Icarus, self).__init__(system)
+        super().__init__(system)
 
     def configure(self, args):
-        super(Icarus, self).configure(args)
+        super().configure(args)
         self._write_config_files()
 
     def _write_config_files(self):
@@ -50,7 +50,7 @@ class Icarus(Simulator):
         f.close()
 
     def build(self):
-        super(Icarus, self).build()
+        super().build()
         
         #Build VPI modules
         for vpi_module in self.vpi_modules:
@@ -83,7 +83,7 @@ class Icarus(Simulator):
                  errormsg = "Failed to compile Icarus Simulation model").run()
         
     def run(self, args):
-        super(Icarus, self).run(args)
+        super().run(args)
 
         #FIXME: Handle failures. Save stdout/stderr.
         args = []
@@ -102,4 +102,4 @@ class Icarus(Simulator):
                  cwd = self.work_root,
                  errormsg = "Failed to run Icarus Simulation").run()
 
-        super(Icarus, self).done(args)
+        super().done(args)

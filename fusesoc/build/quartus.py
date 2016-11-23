@@ -32,7 +32,7 @@ clean:
     TOOL_NAME = 'quartus'
 
     def configure(self, args):
-        super(Quartus, self).configure(args)
+        super().configure(args)
         self._run_qsys()
         self._write_tcl_file()
         self._write_makefile()
@@ -170,11 +170,11 @@ clean:
         makefile.close()
 
     def build(self, args):
-        super(Quartus, self).build(args)
+        super().build(args)
 
         utils.Launcher('make', cwd = self.work_root).run()
 
-        super(Quartus, self).done()
+        super().done()
 
     def pgm(self, remaining):
         args = ['--mode=jtag']

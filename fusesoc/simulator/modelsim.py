@@ -48,7 +48,7 @@ class Modelsim(Simulator):
             self.vsim_options = system.modelsim.vsim_options
             if system.modelsim.run_default_args:
                 self.run_default_args = system.modelsim.run_default_args
-        super(Modelsim, self).__init__(system)
+        super().__init__(system)
         self.model_tech = os.getenv('MODEL_TECH')
         if not self.model_tech:
             raise RuntimeError("Environment variable MODEL_TECH was not found. It should be set to <modelsim install path>/bin")
@@ -161,7 +161,7 @@ class Modelsim(Simulator):
         vpi_make.close()
 
     def configure(self, args):
-        super(Modelsim, self).configure(args)
+        super().configure(args)
         tcl_main = open(os.path.join(self.work_root, "fusesoc_main.tcl"), 'w')
         tcl_main.write("do fusesoc_build_rtl.tcl\n")
 
@@ -174,18 +174,18 @@ class Modelsim(Simulator):
 
 
     def build(self):
-        super(Modelsim, self).build()
+        super().build()
         args = ['-c', '-do', 'do fusesoc_main.tcl; exit']
         Launcher(self.model_tech+'/vsim', args,
                  cwd      = self.work_root,
                  errormsg = "Failed to build simulation model. Log is available in '{}'".format(os.path.join(self.work_root, 'transcript'))).run()
 
     def run(self, args):
-        super(Modelsim, self).run(args)
+        super().run(args)
 
         args = ['-c', '-quiet', '-do', 'fusesoc_run.tcl', '-do', 'run -all']
         Launcher(self.model_tech+'/vsim', args,
                  cwd      = self.work_root,
                  errormsg = "Simulation failed. Simulation log is available in '{}'".format(os.path.join(self.work_root, 'transcript'))).run()
 
-        super(Modelsim, self).done(args)
+        super().done(args)

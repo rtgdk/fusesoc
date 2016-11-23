@@ -11,13 +11,13 @@ class Ghdl(Simulator):
         if system.ghdl is not None:
             self.analyze_options = system.ghdl.analyze_options
             self.run_options     = system.ghdl.run_options
-        super(Ghdl, self).__init__(system)
+        super().__init__(system)
 
     def configure(self, args):
-        super(Ghdl, self).configure(args)
+        super().configure(args)
 
     def build(self):
-        super(Ghdl, self).build()
+        super().build()
 
         (src_files, incdirs) = self._get_fileset_files(['sim', 'ghdl'])
 
@@ -52,7 +52,7 @@ class Ghdl(Simulator):
                  errormsg = "Failed to elaborate {}".format(self.toplevel)).run()
 
     def run(self, args):
-        super(Ghdl, self).run(args)
+        super().run(args)
 
         cmd = 'ghdl'
         args = ['-r']
@@ -62,4 +62,4 @@ class Ghdl(Simulator):
                  cwd      = self.work_root,
                  errormsg = "Simulation failed").run()
 
-        super(Ghdl, self).done(args)
+        super().done(args)

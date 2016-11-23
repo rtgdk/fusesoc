@@ -22,7 +22,7 @@ class Verilator(Simulator):
 
     TOOL_NAME = 'verilator'
     def __init__(self, system):
-        super(Verilator, self).__init__(system)
+        super().__init__(system)
 
         self.verilator_options = []
         self.src_files = []
@@ -68,7 +68,7 @@ class Verilator(Simulator):
 
     def configure(self, args):
         skip = not self.fusesoc_cli_parser
-        super(Verilator, self).configure(args, skip_params = skip)
+        super().configure(args, skip_params = skip)
         self.export()
         self._write_config_files()
         #self.object_files = [os.path.splitext(os.path.basename(s))[0]+'.o' for s in self.src_files]
@@ -135,7 +135,7 @@ class Verilator(Simulator):
         l.run()
 
     def build(self):
-        super(Verilator, self).build()
+        super().build()
         self.archives = []
         for core in self.cores:
             if core.verilator:
@@ -264,7 +264,7 @@ class Verilator(Simulator):
     def run(self, args):
         if not self.fusesoc_cli_parser:
             self.plusarg = []
-        super(Verilator, self).run(args)
+        super().run(args)
         self.env = os.environ.copy()
         self.env['CORE_ROOT'] = os.path.abspath(self.system.core_root)
         self.env['BUILD_ROOT'] = os.path.abspath(self.build_root)

@@ -32,7 +32,7 @@ class Vivado(Backend):
     In the vivado backend the project TCL is written and all files are copied
     """
     def configure(self, args):
-        super(Vivado, self).configure(args)
+        super().configure(args)
 
         self._write_project_tcl_file()
 
@@ -119,14 +119,14 @@ class Vivado(Backend):
     tcl file in batch mode.
     """
     def build(self, args):
-        super(Vivado, self).build(args)
+        super().build(args)
 
         utils.Launcher('vivado', ['-mode', 'batch', '-source',
                                   os.path.join(self.work_root, self.system.sanitized_name+'.tcl')],
                        cwd = self.work_root,
                        errormsg = "Failed to build FPGA bitstream").run()
 
-        super(Vivado, self).done()
+        super().done()
 
     """ Program the FPGA
 
