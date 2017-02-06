@@ -31,4 +31,5 @@ def test_ise():
     assert os.path.exists(generated_tcl)
 
     with open(reference_tcl) as f1, open(generated_tcl) as f2:
-        assert not ''.join(difflib.unified_diff(f1.readlines(), f2.readlines()))
+        diff = ''.join(difflib.unified_diff(f1.readlines(), f2.readlines()))
+        assert diff == ''
