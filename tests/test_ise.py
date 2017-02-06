@@ -1,4 +1,4 @@
-import filecmp
+import difflib
 import os
 import pytest
 
@@ -22,4 +22,7 @@ def test_ise():
     generated_tcl = os.path.join(backend.work_root, tcl_file)
 
     assert os.path.exists(generated_tcl)
-    assert filecmp.cmp(generated_tcl, reference_tcl)
+
+    with open(reference_tcl) as f1, open(generated_tcl) as f2:
+        diff = ''.join(difflib.unified_diff(f1.readlines(), f2.readlines()))
+        assert diff == ''
